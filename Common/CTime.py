@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import date, datetime
 
 
 class CTime:
@@ -24,11 +24,14 @@ class CTime:
         else:
             return f"{self.year:04}/{self.month:02}/{self.day:02} {self.hour:02}:{self.minute:02}"
 
-    def toDateStr(self, splt=''):
+    def toDateStr(self, splt=""):
         return f"{self.year:04}{splt}{self.month:02}{splt}{self.day:02}"
 
     def toDate(self):
         return CTime(self.year, self.month, self.day, 0, 0, auto=False)
+
+    def to_date(self):
+        return date(self.year, self.month, self.day)
 
     def set_timestamp(self):
         if self.hour == 0 and self.minute == 0 and self.auto:

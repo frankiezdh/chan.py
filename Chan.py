@@ -3,7 +3,7 @@ import datetime
 import pickle
 import sys
 from collections import defaultdict
-from typing import Dict, Iterable, List, Optional, Union
+from typing import Dict, Iterable, List, Optional, Type, Union
 
 from BuySellPoint.BS_Point import CBS_Point
 from ChanConfig import CChanConfig
@@ -22,7 +22,7 @@ class CChan:
         code,
         begin_time=None,
         end_time=None,
-        data_src: Union[DATA_SRC, str] = DATA_SRC.BAO_STOCK,
+        data_src: Union[DATA_SRC, str, Type[CCommonStockApi]] = DATA_SRC.BAO_STOCK,
         lv_list=None,
         config=None,
         autype: AUTYPE = AUTYPE.QFQ,
@@ -169,6 +169,8 @@ class CChan:
         return lv_klu_iter
 
     def GetStockAPI(self):
+        if isinstance(self.data_src, Type) and issubclass(self.data_src, CCommonStockApi):
+            return self.data_src
         _dict = {}
         if self.data_src == DATA_SRC.BAO_STOCK:
             from DataAPI.BaoStockAPI import CBaoStock

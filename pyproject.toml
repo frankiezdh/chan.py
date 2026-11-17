@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "chanpy"
+version = "0.1.0"
+description = "缠论计算库（Vespa314/chan.py 的打包版本）"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+dependencies = []
+
+[project.optional-dependencies]
+plot = ["matplotlib>=3.5.3", "ipython>=8.5.0"]
+baostock = ["baostock>=0.8.8"]
+akshare = ["akshare", "pandas>=1.4.2"]
+ccxt = ["ccxt"]
+data = ["baostock>=0.8.8", "akshare", "pandas>=1.4.2", "ccxt"]
+
+[tool.setuptools]
+py-modules = ["Chan", "ChanConfig"]
+packages = [
+  "Bi", "BuySellPoint", "ChanModel", "Combiner", "Common",
+  "DataAPI", "KLine", "Math", "Plot", "Seg", "ZS",
+]
